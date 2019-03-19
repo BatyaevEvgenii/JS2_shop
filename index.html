@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <style>
+        .head {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cart-button {
+            padding: 10px 13px;
+            display: block;
+            border-radius: 7px;
+        }
+
+        .goods-list {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .goods-item {
+            width: 170px;
+            height: 170px;
+            border: 1px solid #9c9c9c;
+            border-radius: 7px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header class="head">
+        <button class="cart-button" type="button">Basket</button>
+    </header>
+    <main>
+        <div class="goods-list"></div>
+    </main>
+    <script>
+        const goods = [
+    {name: 't-short', price: 100, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'socks',price: 200, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'boots', price: 300, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'belt',price: 400, desc: 'Lorem ipsum dolor sit amet'},
+    // { name: 'fifth', price: 500, quantity: 10, desc: 'Lorem ipsum dolor sit amet' },
+    ];
+
+const renderItem = ({name, price, desc}) => `<div class="goods-item"><h3>Название: ${name}</h3><span>Стоимость: ${price} ₽</span><p>Описание: ${desc}</p></div>`;
+//console.log(renderGoodsItem());
+
+
+
+const renderList = items => {
+    // .join('') - уберет запятую
+    const goodsList = items.map(renderItem).join('');
+    document.querySelector('.goods-list').innerHTML = goodsList;
+    };
+
+renderList(goods);
+    </script>
+</body>
+
+</html>
