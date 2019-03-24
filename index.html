@@ -15,7 +15,6 @@
             display: block;
             border-radius: 7px;
         }
-        
         .goods-list {
             display: flex;
             justify-content: space-around;
@@ -28,8 +27,6 @@
             border-radius: 7px;
             text-align: center;
         }
-
-
 
     </style>
 
@@ -44,17 +41,14 @@
     </main>
     <script>
         const goods = [
-    {name: 'one', price: 100},
-    {name: 'two',price: 200},
-    {name: 'three', price: 300},
-    {name: 'four',price: 400},
-    // { name: 'fifth', price: 500, quantity: 10, desc: 'Lorem ipsum dolor sit amet' },
+
+    {name: 't-short', price: 100, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'socks',price: 200, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'boots', price: 300, desc: 'Lorem ipsum dolor sit amet'},
+    {name: 'belt',price: 400, desc: 'Lorem ipsum dolor sit amet'},
     ];
 
-const renderItem = ({name, price}) => `<div class="goods-item"><h3>${name}</h3><span>${price}</span></div>`;
-//console.log(renderGoodsItem());
-
-
+const renderItem = ({name, price, desc}) => `<div class="goods-item"><h3>Название: ${name}</h3><span>Стоимость: ${price} ₽</span><p>Описание: ${desc}</p></div>`;
 
 const renderList = items => {
     // .join('') - уберет запятую
