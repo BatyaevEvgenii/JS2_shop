@@ -9,7 +9,6 @@
             display: flex;
             justify-content: flex-end;
         }
-
         .cart-button {
             padding: 10px 13px;
             display: block;
@@ -19,7 +18,6 @@
             display: flex;
             justify-content: space-around;
         }
-
         .goods-item {
             width: 170px;
             height: 170px;
@@ -27,7 +25,6 @@
             border-radius: 7px;
             text-align: center;
         }
-
     </style>
 
 </head>
@@ -38,25 +35,70 @@
     </header>
     <main>
         <div class="goods-list"></div>
+        <div class="total-price"></div>
     </main>
     <script>
-        const goods = [
+        class GoodsItem {
+            constructor(name, price, desc, quantity){
+                this.name = name;
+                this.price = price;
+                this.desc = desc;
+            }
 
-    {name: 't-short', price: 100, desc: 'Lorem ipsum dolor sit amet'},
-    {name: 'socks',price: 200, desc: 'Lorem ipsum dolor sit amet'},
-    {name: 'boots', price: 300, desc: 'Lorem ipsum dolor sit amet'},
-    {name: 'belt',price: 400, desc: 'Lorem ipsum dolor sit amet'},
-    ];
+            render() {
+                return `<div class="goods-item"><h3>Название: ${this.name}</h3><span>Стоимость: ${this.price} ₽</span><p>Описание: ${this.desc}</p></div>`
 
-const renderItem = ({name, price, desc}) => `<div class="goods-item"><h3>Название: ${name}</h3><span>Стоимость: ${price} ₽</span><p>Описание: ${desc}</p></div>`;
+            }
+        }
 
-const renderList = items => {
-    // .join('') - уберет запятую
-    const goodsList = items.map(renderItem).join('');
-    document.querySelector('.goods-list').innerHTML = goodsList;
-    };
+        class GoodsList {
+            constructor(){
+                this.goods = [];
+            }
 
-renderList(goods);
+            fetchGoods() {
+                 this.goods = [
+                    {name: 't-short', price: 100, desc: 'Lorem ipsum dolor sit amet'},
+                    {name: 'socks', price: 200, desc: 'Lorem ipsum dolor sit amet'},
+                    {name: 'boots', price: 300, desc: 'Lorem ipsum dolor sit amet'},
+                    {name: 'belt', price: 400, desc: 'Lorem ipsum dolor sit amet'},
+                 ];
+
+                 // каждый item превращаем в экземпляр класса item
+                this.goods = this.goods.map(good => new GoodsItem(good.name, good.price, good.desc));
+            }
+
+            totalCostGoods(){
+                var total = 0;
+                for (var i = 0; i < this.goods.length; i++){
+                    total = total + this.goods[i].price;
+                }
+
+                return total;
+
+            }
+
+            render() {
+                const goodsList = this.goods.map(good => good.render());
+                return goodsList.join('');
+            }
+        }
+
+        class OrderGoods {
+            constructor (name, price, quantity){
+                this.name = name;
+                this.price = price;
+                this.quantity = quantity;
+            }
+
+        }
+
+        const goods = new GoodsList();
+        goods.fetchGoods();
+        console.log(goods.totalCostGoods());
+
+        document.querySelector('.goods-list').innerHTML = goods.render();
+        document.querySelector('.total-price').textContent = `Суммарная стоимость всех товаров: ${goods.totalCostGoods()} ₽`;
     </script>
 </body>
 
