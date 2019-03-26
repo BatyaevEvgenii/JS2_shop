@@ -47,7 +47,6 @@
 
             render() {
                 return `<div class="goods-item"><h3>Название: ${this.name}</h3><span>Стоимость: ${this.price} ₽</span><p>Описание: ${this.desc}</p></div>`
-
             }
         }
 
@@ -64,18 +63,12 @@
                     {name: 'belt', price: 400, desc: 'Lorem ipsum dolor sit amet'},
                  ];
 
-                 // каждый item превращаем в экземпляр класса item
+                 // каждый good превращаем в экземпляр класса good
                 this.goods = this.goods.map(good => new GoodsItem(good.name, good.price, good.desc));
             }
 
-            totalCostGoods(){
-                var total = 0;
-                for (var i = 0; i < this.goods.length; i++){
-                    total = total + this.goods[i].price;
-                }
-
-                return total;
-
+            totalCostGoods(){ 
+                return this.goods.reduce((accumulator, good) => accumulator + good.price, 0);
             }
 
             render() {
@@ -95,7 +88,7 @@
 
         const goods = new GoodsList();
         goods.fetchGoods();
-        console.log(goods.totalCostGoods());
+        // console.log(goods.totalCostGoods());
 
         document.querySelector('.goods-list').innerHTML = goods.render();
         document.querySelector('.total-price').textContent = `Суммарная стоимость всех товаров: ${goods.totalCostGoods()} ₽`;
