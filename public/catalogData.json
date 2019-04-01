@@ -1,0 +1,6 @@
+[
+  {"id": 1, "name": "t-short", "price": 100, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
+  {"id": 2, "name": "socks", "price": 200, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
+  {"id": 3, "name": "boots", "price": 300, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
+  {"id": 4, "name": "belt", "price": 400, "desc": "Lorem ipsum dolor sit amet", "quantity": 10}
+]
