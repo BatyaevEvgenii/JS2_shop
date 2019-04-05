@@ -9,15 +9,18 @@
             display: flex;
             /* justify-content: flex-end; */
         }
+
         .cart-button {
             padding: 10px 13px;
             display: block;
             border-radius: 7px;
         }
+
         .goods-list {
             display: flex;
             justify-content: space-around;
         }
+
         .goods-item {
             width: 170px;
             height: 170px;
@@ -33,116 +36,31 @@
     <header class="head">
         <div>
             <div class="basket"></div>
-            <button class="cart-button" type="button">Basket</button>
         </div>
-        
     </header>
     <main>
         <div class="goods-list"></div>
         <div class="total-price"></div>
+
     </main>
-    <script>
-        function sendRequest(url) {
-            return new Promise((resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', url); // настройка запроса
-                xhr.send();
-
-                xhr.onreadystatechange = () => {
-                    if(xhr.readyState === XMLHttpRequest.DONE) {
-                        // проверка статуса
-                        if (xhr.status === 200) {
-                            resolve(JSON.parse(xhr.responseText));
-                        } else {
-                            reject();
-                        }
-                    }
-                }
-            });
-        }
-
-        const API_URL = 'http://localhost:3000';// адрес нашего сервера
 
 
-        class GoodsItem {
-            constructor(id, name, price, desc, quantity){
-                this.id = id;
-                this.name = name;
-                this.price = price;
-                this.desc = desc;
-                this.quantity = quantity;
-            }
+    <div id="app">
+        <div> 
+            <ul> 
+                <li v-for="(goods, index) in getBasket" 
+                    style="list-style-type: none;">
+                    {{goods.id}} Название: {{goods.name}} Стоимость: {{goods.price}} ₽ Количество: {{goods.quantity}}
+                    <button @click="getBasket.splice(index, 1)">Удалить</button>
+                </li>
+            </ul>
+            <p v-if="getBasket.length === 0">Корзина пуста!!!</p>
+        </div>
 
-            render() {
-                return `<div class="goods-item">
-                    <h3>Название: ${this.name}</h3>
-                    <span>Стоимость: ${this.price} ₽</span>
-                    <p>Описание: ${this.desc}</p>
-                    <button class="tobuy">Купить</button></div>`
-            }
-
-            renderBasket() {
-                return `<div class="goods-basket"> 
-                    <span>Название: ${this.name}</span>
-                    <span>Стоимость: ${this.price} ₽</span>
-                    <span>Количество: ${this.quantity}</span> 
-                    <button class="todelete">Удалить</button></div>`;
-            }
-        }
-
-        // товар
-        class GoodsList {
-            constructor(){
-                this.goods = [];
-            }
-
-            fetchGoods(callback) {
-                return sendRequest(`${API_URL}/catalogData.json`).then((goods) => {
-                    // каждый good превращаем в экземпляр класса good
-                    this.goods = goods.map(good => new GoodsItem(good.id, good.name, good.price, good.desc, good.quantity));
-                });
-            }
-
-            totalCostGoods(){ 
-                return this.goods.reduce((accumulator, good) => accumulator + good.price, 0);
-            }
-
-            render() {
-                const goodsList = this.goods.map(good => good.render());
-                return goodsList.join('');
-            }
-        }
-
-        class BasketGoods {
-            constructor(){
-                this.goodsBasket = [];
-            }
-
-            fetchBasketGoods(callback) {
-                return sendRequest(`${API_URL}/getBasket.json`).then((goodsBasket) => {
-                    this.goodsBasket = goodsBasket.map(good => new GoodsItem(good.id, good.name, good.price, good.desc, good.quantity));
-                });
-            }
-
-            renderBasket() {
-                const goodsBasketList = this.goodsBasket.map(good => good.renderBasket());
-                return goodsBasketList.join('');
-            }
-        }
-
-        const goods = new GoodsList();
-        goods.fetchGoods().then(() => {
-            // console.log(goods.totalCostGoods());
-            document.querySelector('.goods-list').innerHTML = goods.render();
-            document.querySelector('.total-price').textContent = `Суммарная стоимость всех товаров: ${goods.totalCostGoods()} ₽`;
-        });
-        
-        const goodsBasket = new BasketGoods();
-        goodsBasket.fetchBasketGoods().then(() => {
-            document.querySelector('.basket').innerHTML = goodsBasket.renderBasket();
-        });
-
-    </script>
+    </div>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
