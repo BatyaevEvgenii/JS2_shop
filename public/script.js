@@ -1,20 +1,37 @@
-const app = new Vue ({
+const API_URL = 'http://localhost:3000';
+
+const app = new Vue({
   el: '#app', // привязка к html-элементу <div id="app">
   data: {
+    searchQuery: '',
+    filterValue: '',
+    filteredGoods: [],
     name: 'Chack',
-    getBasket: [
-      {id: 1, name: "t-short", price: 100, desc: "Lorem ipsum dolor sit amet", quantity: 1},
-      {id: 2, name: "socks", price: 200, "desc": "Lorem ipsum dolor sit amet", quantity: 1},
-      {id: 3, name: "boots", price: 300, desc: "Lorem ipsum dolor sit amet", quantity: 1}
-    ],
-    catalogData: [
-      {"id": 1, "name": "t-short", "price": 100, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
-      {"id": 2, "name": "socks", "price": 200, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
-      {"id": 3, "name": "boots", "price": 300, "desc": "Lorem ipsum dolor sit amet", "quantity": 10},
-      {"id": 4, "name": "belt", "price": 400, "desc": "Lorem ipsum dolor sit amet", "quantity": 10}
-    ]
+    getBasket: [],
+    catalogData: []
+  },
+  computed: {
+    //  
   },
   methods: {
+    handleSearchClick() {
+      const regexp = new RegExp(this.searchQuery, 'i');
+      this.filteredGoods = this.goods.filter((good) => regexp.test(good.name));
+      console.log(this.filteredGoods);
+    },
+  },
+  mounted() {
+    fetch(`${API_URL}/getbasket`)
+      .then(response => response.json())
+      .then((goods) => {
+        this.getBasket = goods;
+      });
+    fetch(`${API_URL}/catalogdata`)
+      .then(response => response.json())
+      .then((goods) => {
+        // this.catalogData = goods;
+        this.goods = goods;
+        this.filteredGoods = goods;
+      });
   }
-
 });

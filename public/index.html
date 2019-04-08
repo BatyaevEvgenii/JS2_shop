@@ -33,32 +33,38 @@
 </head>
 
 <body>
-    <header class="head">
-        <div>
-            <div class="basket"></div>
-        </div>
-    </header>
-    <main>
-        <div class="goods-list"></div>
-        <div class="total-price"></div>
-
-    </main>
-
-
     <div id="app">
-        <div> 
-            <ul> 
-                <li v-for="(goods, index) in getBasket" 
-                    style="list-style-type: none;">
-                    {{goods.id}} Название: {{goods.name}} Стоимость: {{goods.price}} ₽ Количество: {{goods.quantity}}
+        <header class="head">
+            <input type="text" v-model="searchQuery" class="search-text" />
+            <button class="search-button" @click="handleSearchClick">Поиск</button>
+            <!-- <div>
+            <div class="basket"></div>
+        </div> -->
+        </header>
+        <main>
+            <div class="goods-list">
+                <div class="goods-item" v-for="goods in filteredGoods"> <!--catalogData -->
+                    <h3>Название: {{goods.name}}</h3>
+                    <span>Стоимость: {{goods.price}} ₽</span>
+                    <p>Описание: {{goods.desc}}</p>
+                    <button class="tobuy">Купить</button>
+                </div>
+            </div>
+            <div class="total-price"></div>
+        </main>
+        <div>
+            <ul>
+                <li v-for="(goods, index) in getBasket" style="list-style-type: none;">
+                    {{goods.id}} Название: {{goods.name}} Стоимость: {{goods.price}} ₽ Количество:
+                    {{goods.quantity}}
                     <button @click="getBasket.splice(index, 1)">Удалить</button>
                 </li>
             </ul>
             <p v-if="getBasket.length === 0">Корзина пуста!!!</p>
         </div>
 
+
     </div>
- 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
     <script src="script.js"></script>
 </body>
