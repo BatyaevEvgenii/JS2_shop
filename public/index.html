@@ -47,7 +47,7 @@
                     <h3>Название: {{goods.name}}</h3>
                     <span>Стоимость: {{goods.price}} ₽</span>
                     <p>Описание: {{goods.desc}}</p>
-                    <button class="tobuy">Купить</button>
+                    <button class="tobuy" @click="handleBuyClick(goods)">Купить</button>
                 </div>
             </div>
             <div class="total-price"></div>
@@ -57,9 +57,12 @@
                 <li v-for="(goods, index) in getBasket" style="list-style-type: none;">
                     {{goods.id}} Название: {{goods.name}} Стоимость: {{goods.price}} ₽ Количество:
                     {{goods.quantity}}
-                    <button @click="getBasket.splice(index, 1)">Удалить</button>
+                    <button @click="handleDeleteClick(goods)">Удалить</button>
                 </li>
             </ul>
+            <div>
+                Общая стоимость товаров в корзине: {{ totalCost }}
+            </div>
             <p v-if="getBasket.length === 0">Корзина пуста!!!</p>
         </div>
 

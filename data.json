@@ -1,62 +1,35 @@
 {
-  "getbasket": [
-    {
-      "id": 1,
-      "name": "t-short",
-      "price": 100,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 1
-    },
-    {
-      "id": 2,
-      "name": "socks",
-      "price": 200,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 1
-    },
-    {
-      "id": 3,
-      "name": "boots",
-      "price": 300,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 1
-    }
-  ],
+  "getbasket": [],
   "catalogData": [
     {
       "id": 1,
       "name": "t-short",
       "price": 100,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 10
+      "desc": "Lorem ipsum dolor sit amet"
     },
     {
       "id": 2,
       "name": "socks",
       "price": 200,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 10
+      "desc": "Lorem ipsum dolor sit amet"
     },
     {
       "id": 3,
       "name": "boots",
       "price": 300,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 10
+      "desc": "Lorem ipsum dolor sit amet"
     },
     {
       "id": 4,
       "name": "belt",
       "price": 400,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 10
+      "desc": "Lorem ipsum dolor sit amet"
     },
     {
       "id": 5,
       "name": "cap",
       "price": 3000,
-      "desc": "Lorem ipsum dolor sit amet",
-      "quantity": 50
+      "desc": "Lorem ipsum dolor sit amet"
     }
   ]
 }
